@@ -1,0 +1,12 @@
+name: example
+version: 1.0.0
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:  
+  lazy_lumberdash:
+    path: ../
+  print_lumberdash: 2.1.0
+
+dev_dependencies:

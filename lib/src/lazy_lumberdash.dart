@@ -65,19 +65,20 @@ abstract class LazyLumberdash extends LumberdashClient {
 }
 
 class PeriodicLazyLumberdash extends LazyLumberdash {
-  final Duration _innerDuration;
+  final Duration duration;
 
   Timer _periodicTimer;
 
   PeriodicLazyLumberdash({
-    @required final Duration duration,
-  }) : _innerDuration = duration;
+    @required final LumberdashClient client,
+    @required final this.duration,
+  }) : super(client: client);
 
   @override
   void onNewLogCall(final void Function() call) {
     if (_periodicTimer == null) {
       Timer.periodic(
-        _innerDuration,
+        duration,
         (_) {
           super.dispatchLogCalls();
         },
@@ -90,8 +91,9 @@ class StackLazyLumberdash extends LazyLumberdash {
   final int limit;
 
   StackLazyLumberdash({
+    @required final LumberdashClient client,
     @required final this.limit,
-  });
+  }) : super(client: client);
 
   @override
   void onNewLogCall(final void Function() call) {

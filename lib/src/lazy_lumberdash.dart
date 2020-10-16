@@ -62,6 +62,9 @@ abstract class LazyLumberdash extends LumberdashClient {
     }
   }
 
+  @mustCallSuper
+  void close() => dispatchLogCalls();
+
   void onNewLogCall(final void Function() call);
 }
 
@@ -78,13 +81,20 @@ class PeriodicLazyLumberdash extends LazyLumberdash {
   @override
   void onNewLogCall(final void Function() call) {
     if (_periodicTimer == null) {
-      Timer.periodic(
+      _periodicTimer = Timer.periodic(
         duration,
         (_) {
           super.dispatchLogCalls();
         },
       );
     }
+  }
+
+  @override
+  void close() {
+    super.close();
+
+    _periodicTimer.cancel();
   }
 }
 

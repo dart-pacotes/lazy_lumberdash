@@ -53,8 +53,9 @@ abstract class LazyLumberdash extends LumberdashClient {
   void dispatchLogCalls() {
     if (!_lock) {
       _lock = true;
-      for (var i = 0; i < _logCalls.length; i++) {
-        _logCalls.removeAt(i)();
+
+      while (_logCalls.isNotEmpty) {
+        _logCalls.removeAt(0)();
       }
 
       _lock = false;

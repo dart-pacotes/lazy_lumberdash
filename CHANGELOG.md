@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## 0.0.1 - 17-10-2020
 
-* TODO: Describe initial release.
+* Stack and Periodic implementations of `LazyLumberdash` available.

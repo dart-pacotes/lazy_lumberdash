@@ -29,7 +29,7 @@ abstract class LazyLumberdash extends LumberdashClient {
   bool _lock = false;
 
   LazyLumberdash({
-    @required final LumberdashClient client,
+    required final LumberdashClient client,
   }) : _innerLumberdashClient = client;
 
   /// Registers a [_innerLumberdashClient] `logError` call on [_logCalls]
@@ -42,7 +42,7 @@ abstract class LazyLumberdash extends LumberdashClient {
 
   /// Registers a [_innerLumberdashClient] `logFatal` call on [_logCalls]
   @override
-  void logFatal(String message, [Map<String, String> extras]) {
+  void logFatal(String message, [Map<String, String>? extras]) {
     return registerLogCall(
       () => _innerLumberdashClient.logFatal(message, extras),
     );
@@ -50,7 +50,7 @@ abstract class LazyLumberdash extends LumberdashClient {
 
   /// Registers a [_innerLumberdashClient] `logMessage` call on [_logCalls]
   @override
-  void logMessage(String message, [Map<String, String> extras]) {
+  void logMessage(String message, [Map<String, String>? extras]) {
     return registerLogCall(
       () => _innerLumberdashClient.logMessage(message, extras),
     );
@@ -58,7 +58,7 @@ abstract class LazyLumberdash extends LumberdashClient {
 
   /// Registers a [_innerLumberdashClient] `logWarning` call on [_logCalls]
   @override
-  void logWarning(String message, [Map<String, String> extras]) {
+  void logWarning(String message, [Map<String, String>? extras]) {
     return registerLogCall(
       () => _innerLumberdashClient.logWarning(message, extras),
     );
@@ -104,11 +104,11 @@ abstract class LazyLumberdash extends LumberdashClient {
 class PeriodicLazyLumberdash extends LazyLumberdash {
   final Duration duration;
 
-  Timer _periodicTimer;
+  Timer? _periodicTimer;
 
   PeriodicLazyLumberdash({
-    @required final LumberdashClient client,
-    @required final this.duration,
+    required final LumberdashClient client,
+    required final this.duration,
   }) : super(client: client);
 
   @override
@@ -127,7 +127,7 @@ class PeriodicLazyLumberdash extends LazyLumberdash {
   void close() {
     super.close();
 
-    _periodicTimer.cancel();
+    _periodicTimer!.cancel();
   }
 }
 
@@ -140,8 +140,8 @@ class StackLazyLumberdash extends LazyLumberdash {
   final int limit;
 
   StackLazyLumberdash({
-    @required final LumberdashClient client,
-    @required final this.limit,
+    required final LumberdashClient client,
+    required final this.limit,
   }) : super(client: client);
 
   @override

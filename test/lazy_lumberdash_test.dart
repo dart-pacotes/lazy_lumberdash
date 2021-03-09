@@ -1,5 +1,5 @@
 import 'package:lazy_lumberdash/lazy_lumberdash.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 class MockLumberdashClient extends Mock implements LumberdashClient {}
@@ -41,7 +41,7 @@ void main() {
 
           final expectedLogCallCount = workers * callsPerWorker;
 
-          verify(mockLumberdashClient.logMessage(any)).called(
+          verify(() => mockLumberdashClient.logMessage(any())).called(
             expectedLogCallCount,
           );
         },
@@ -52,7 +52,7 @@ void main() {
         () {
           final callOrder = <String>[];
 
-          when(mockLumberdashClient.logMessage(any)).thenAnswer(
+          when(() => mockLumberdashClient.logMessage(any())).thenAnswer(
             (_) {
               callOrder.add(_.positionalArguments.first);
             },
@@ -67,7 +67,7 @@ void main() {
           lazyLumberdashClient.logMessage('b');
           lazyLumberdashClient.logMessage('c');
 
-          verify(mockLumberdashClient.logMessage(any)).called(3);
+          verify(() => mockLumberdashClient.logMessage(any())).called(3);
 
           expect(callOrder, ['a', 'b', 'c']);
         },
@@ -83,7 +83,7 @@ void main() {
         () async {
           final callOrder = <String>[];
 
-          when(mockLumberdashClient.logMessage(any)).thenAnswer(
+          when(() => mockLumberdashClient.logMessage(any())).thenAnswer(
             (_) {
               callOrder.add(_.positionalArguments.first);
             },
@@ -101,7 +101,7 @@ void main() {
 
           await Future.delayed(duration);
 
-          verify(mockLumberdashClient.logMessage(any)).called(2);
+          verify(() => mockLumberdashClient.logMessage(any())).called(2);
 
           expect(callOrder, ['a', 'b']);
 
@@ -109,7 +109,7 @@ void main() {
 
           await Future.delayed(duration);
 
-          verify(mockLumberdashClient.logMessage(any)).called(1);
+          verify(() => mockLumberdashClient.logMessage(any())).called(1);
 
           expect(callOrder, ['a', 'b', 'c']);
 
@@ -133,7 +133,7 @@ void main() {
           lazyLumberdashClient.logMessage('a');
           lazyLumberdashClient.logMessage('b');
 
-          verifyNever(mockLumberdashClient.logMessage(any));
+          verifyNever(() => mockLumberdashClient.logMessage(any()));
         },
       );
 
@@ -149,7 +149,7 @@ void main() {
           lazyLumberdashClient.logMessage('b');
           lazyLumberdashClient.logMessage('c');
 
-          verify(mockLumberdashClient.logMessage(any)).called(3);
+          verify(() => mockLumberdashClient.logMessage(any())).called(3);
         },
       );
     },

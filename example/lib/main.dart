@@ -1,5 +1,38 @@
 import 'package:lazy_lumberdash/lazy_lumberdash.dart';
-import 'package:print_lumberdash/print_lumberdash.dart';
+
+class PrintLumberdash extends LumberdashClient {
+  @override
+  void logError(exception, [stacktrace]) {
+    print('logError');
+
+    print(exception);
+    print(stacktrace);
+  }
+
+  @override
+  void logFatal(String message, [Map<String, String>? extras]) {
+    print('logFatal');
+
+    print(message);
+    print(extras);
+  }
+
+  @override
+  void logMessage(String message, [Map<String, String>? extras]) {
+    print('logMessage');
+
+    print(message);
+    print(extras);
+  }
+
+  @override
+  void logWarning(String message, [Map<String, String>? extras]) {
+    print('logWarning');
+
+    print(message);
+    print(extras);
+  }
+}
 
 void main() async {
   // Using StackLazyLumberdash

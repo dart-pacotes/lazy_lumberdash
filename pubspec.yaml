@@ -1,6 +1,6 @@
 name: lazy_lumberdash
 description: Lumberdash abstraction that lazily dispatches log calls, either periodically or stack size.
-version: 0.0.1
+version: 0.0.2
 author: freitzzz
 homepage: https://github.com/freitzzz/lazy_lumberdash
 

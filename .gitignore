@@ -78,3 +78,6 @@ pubspec.lock
 
 # Ignore .metadata
 .metadata
+
+# Ignore coverage
+coverage

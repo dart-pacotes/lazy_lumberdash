@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   lumberdash: ^3.0.0
+  meta: ^1.7.0
 
 dev_dependencies:
   lints: ^1.0.1

@@ -1,4 +1,3 @@
-include: package:effective_dart/analysis_options.yaml # https://pub.dartlang.org/packages/effective_dart
 linter: # Lint rules: http://dart-lang.github.io/linter/lints/
   rules:
     public_member_api_docs: false
